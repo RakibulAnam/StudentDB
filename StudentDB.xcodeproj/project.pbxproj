@@ -20,6 +20,7 @@
 		E2B31B7E2A95DF620003473B /* StudentDB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E2B31B7C2A95DF620003473B /* StudentDB.xcdatamodeld */; };
 		E2B31B802A95DF640003473B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E2B31B7F2A95DF640003473B /* Assets.xcassets */; };
 		E2B31B832A95DF640003473B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2B31B812A95DF640003473B /* LaunchScreen.storyboard */; };
+		E2C1388A2A976CC8002A46E5 /* AddSubjectController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C138892A976CC8002A46E5 /* AddSubjectController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		E2B31B7F2A95DF640003473B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E2B31B822A95DF640003473B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E2B31B842A95DF640003473B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2C138892A976CC8002A46E5 /* AddSubjectController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSubjectController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +70,6 @@
 				32A95709BFCC93E9429AC72C /* Pods-StudentDB.debug.xcconfig */,
 				3E75EF98F2F1E50848967D4F /* Pods-StudentDB.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -81,13 +82,14 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		E288FAB32A97324E00A1B4F2 /* View */ = {
+		E288FAB32A97324E00A1B4F2 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				E2C138892A976CC8002A46E5 /* AddSubjectController.swift */,
 				E288FAB42A97467E00A1B4F2 /* AddStudentViewController.swift */,
 				E2B31B772A95DF620003473B /* ViewController.swift */,
 			);
-			path = View;
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		E2B31B672A95DF620003473B = {
@@ -111,11 +113,11 @@
 		E2B31B722A95DF620003473B /* StudentDB */ = {
 			isa = PBXGroup;
 			children = (
+				E2B31B792A95DF620003473B /* Main.storyboard */,
 				E27771A02A961E3A0097170F /* Model */,
-				E288FAB32A97324E00A1B4F2 /* View */,
+				E288FAB32A97324E00A1B4F2 /* Controller */,
 				E2B31B732A95DF620003473B /* AppDelegate.swift */,
 				E2B31B752A95DF620003473B /* SceneDelegate.swift */,
-				E2B31B792A95DF620003473B /* Main.storyboard */,
 				E2B31B7F2A95DF640003473B /* Assets.xcassets */,
 				E2B31B812A95DF640003473B /* LaunchScreen.storyboard */,
 				E2B31B842A95DF640003473B /* Info.plist */,
@@ -242,6 +244,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2C1388A2A976CC8002A46E5 /* AddSubjectController.swift in Sources */,
 				E2B31B782A95DF620003473B /* ViewController.swift in Sources */,
 				E288FAB82A9749DA00A1B4F2 /* TableViewCell.swift in Sources */,
 				E288FAB52A97467E00A1B4F2 /* AddStudentViewController.swift in Sources */,
