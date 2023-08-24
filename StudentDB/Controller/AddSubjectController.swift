@@ -13,7 +13,8 @@ class AddSubjectController: UIViewController {
     let subDrop = DropDown()
     let gradeDrop = DropDown()
     
-    let subList : [String] = ["Math", "Science", "Geography"]
+    let sscSubList : [String] = ["Math", "Science", "Geography"]
+    let hscSubList : [String] = ["Math", "Science", "Geography"]
 
     @IBOutlet weak var subjectDDView: UIView!
     
@@ -25,10 +26,12 @@ class AddSubjectController: UIViewController {
 
         //setting up dropdown
         
-        subDrop.anchorView = subjectDDView
-        subDrop.dataSource = subList
-        subDrop.bottomOffset = CGPoint(x: 0, y:(subDrop.anchorView?.plainView.bounds.height)!)
-        subDrop.topOffset = CGPoint(x: 0, y:-(subDrop.anchorView?.plainView.bounds.height)!)
+        
+        setDropDown(subDrop, dataSource: sscSubList)
+//        subDrop.anchorView = subjectDDView
+//        subDrop.dataSource = subList
+//        subDrop.bottomOffset = CGPoint(x: 0, y:(subDrop.anchorView?.plainView.bounds.height)!)
+//        subDrop.topOffset = CGPoint(x: 0, y:-(subDrop.anchorView?.plainView.bounds.height)!)
         
         
         //Tap View
@@ -43,6 +46,13 @@ class AddSubjectController: UIViewController {
     
     @objc func customViewTapped(){
         subDrop.show()
+    }
+    
+    func setDropDown(_ dropDown : DropDown, dataSource : [String]){
+        dropDown.anchorView = subjectDDView
+        dropDown.dataSource = dataSource
+        dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
+        subDrop.topOffset = CGPoint(x: 0, y:-(dropDown.anchorView?.plainView.bounds.height)!)
     }
     
 
