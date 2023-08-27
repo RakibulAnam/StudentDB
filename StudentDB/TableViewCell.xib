@@ -4,29 +4,30 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="subGrade" rowHeight="64" id="KGk-i7-Jjw" customClass="TableViewCell" customModule="StudentDB" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="343" height="64"/>
+            <rect key="frame" x="0.0" y="0.0" width="395" height="64"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="343" height="64"/>
+                <rect key="frame" x="0.0" y="0.0" width="395" height="64"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="198" translatesAutoresizingMaskIntoConstraints="NO" id="57R-Rh-5xm">
-                        <rect key="frame" x="10" y="10" width="323" height="44"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacingType="standard" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="57R-Rh-5xm">
+                        <rect key="frame" x="10" y="10" width="375" height="44"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subject" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MG1-iZ-Dqv">
-                                <rect key="frame" x="0.0" y="0.0" width="62.666666666666664" height="44"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kdv-Gn-jfr">
+                                <rect key="frame" x="0.0" y="0.0" width="176" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grade" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwh-Q3-aDc">
-                                <rect key="frame" x="260.66666666666669" y="0.0" width="62.333333333333314" height="44"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Grade" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jwh-Q3-aDc">
+                                <rect key="frame" x="184" y="0.0" width="191" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -35,9 +36,6 @@
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="jwh-Q3-aDc" secondAttribute="bottom" id="ANE-Ib-bhW"/>
                             <constraint firstAttribute="trailing" secondItem="jwh-Q3-aDc" secondAttribute="trailing" id="FIE-Be-W8l"/>
-                            <constraint firstAttribute="bottom" secondItem="MG1-iZ-Dqv" secondAttribute="bottom" id="IU4-Wt-uXB"/>
-                            <constraint firstItem="MG1-iZ-Dqv" firstAttribute="leading" secondItem="57R-Rh-5xm" secondAttribute="leading" id="bD0-S1-0uO"/>
-                            <constraint firstItem="MG1-iZ-Dqv" firstAttribute="top" secondItem="57R-Rh-5xm" secondAttribute="top" id="dYz-Ty-1ee"/>
                             <constraint firstItem="jwh-Q3-aDc" firstAttribute="top" secondItem="57R-Rh-5xm" secondAttribute="top" id="e3w-TP-z2e"/>
                         </constraints>
                     </stackView>
@@ -52,9 +50,9 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="grade" destination="jwh-Q3-aDc" id="Woa-38-J7k"/>
-                <outlet property="subName" destination="MG1-iZ-Dqv" id="SUv-Sr-MZl"/>
+                <outlet property="subName" destination="Kdv-Gn-jfr" id="LFG-dC-AS6"/>
             </connections>
-            <point key="canvasLocation" x="142.74809160305344" y="27.464788732394368"/>
+            <point key="canvasLocation" x="182.44274809160305" y="27.464788732394368"/>
         </tableViewCell>
     </objects>
 </document>

@@ -19,8 +19,10 @@ class AddStudentViewController: UIViewController {
     @IBOutlet weak var hscHeight: NSLayoutConstraint!
     
     
-    var sscSub : [String] = []
-    var hscSub : [String] = []
+    var sscSub : [Subject] = []
+    var hscSub : [Subject] = []
+    
+    let studentManager = StudentManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +68,7 @@ class AddStudentViewController: UIViewController {
 
 }
 
+//MARK: - Table DataSource
 extension AddStudentViewController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        if tableView == sscTable{

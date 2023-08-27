@@ -23,11 +23,10 @@ struct StudentManager{
     
     func getStudents(){
         
-        guard let url = URL(string: "http://localhost:9191/students") else {
+        guard let url = URL(string: K.API.GET) else {
             print("Invalid URL")
             return
         }
-        
         let session = URLSession(configuration: .default)
         
         let task = session.dataTask(with: url) { data, response, error in
@@ -35,7 +34,6 @@ struct StudentManager{
                 print("Error Starting sesseion \(error)")
                 return
             }
-            
             if let safeData = data {
                 
                 let decoder = JSONDecoder()
@@ -47,14 +45,59 @@ struct StudentManager{
                 } catch  {
                     print(error)
                 }
-                
-                
             }
         }
-        
         task.resume()
+    }
+    
+    
+    func postStudent(add std : AddStudentModel){
+        
+        guard let url = URL(string: K.API.POST) else {
+            print("Invalid Posting URL")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "PUT"
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let jSONData = std
+        
+        let encoder = JSONEncoder()
+        
+        if let encodedData = try? encoder.encode(jSONData){
+            
+            print(String(data: encodedData, encoding: .utf8)!)
+            request.httpBody = encodedData
+            
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                
+                if let error = error {
+                                print("ErrorBro: \(error.localizedDescription)")
+                                return
+                            }
+                
+                if let data = data {
+                             do {
+                                 // Parse the response data if needed
+                                 let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
+                                 print(jsonResponse)
+                             } catch {
+                                 print("JSON Error: \(error.localizedDescription)")
+                             }
+                }
+                
+            }.resume()
+            
+        }
         
         
+        
+        //END
     }
     
     

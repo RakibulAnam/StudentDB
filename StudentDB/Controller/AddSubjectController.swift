@@ -15,6 +15,7 @@ class AddSubjectController: UIViewController {
     
     let sscSubList : [String] = ["Math", "Science", "Geography"]
     let hscSubList : [String] = ["Math", "Science", "Geography"]
+    let gradeList : [String] = ["A+","A","B+", "B"]
 
     @IBOutlet weak var subjectDDView: UIView!
     
@@ -27,7 +28,8 @@ class AddSubjectController: UIViewController {
         //setting up dropdown
         
         
-        setDropDown(subDrop, dataSource: sscSubList)
+        setDropDown(subDrop, dataSource: sscSubList, in: subjectDDView)
+        setDropDown(gradeDrop, dataSource: gradeList, in: gradeDDView)
 //        subDrop.anchorView = subjectDDView
 //        subDrop.dataSource = subList
 //        subDrop.bottomOffset = CGPoint(x: 0, y:(subDrop.anchorView?.plainView.bounds.height)!)
@@ -35,21 +37,47 @@ class AddSubjectController: UIViewController {
         
         
         //Tap View
-        subjectDDView.isUserInteractionEnabled = true
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(customViewTapped))
-        subjectDDView.addGestureRecognizer(tapGesture)
+//        subjectDDView.isUserInteractionEnabled = true
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(customViewTapped2))
+//        subjectDDView.addGestureRecognizer(tapGesture)
+//
+//
+//        gradeDDView.isUserInteractionEnabled = true
+//        let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(customViewTapped2))
+//        gradeDDView.addGestureRecognizer(tapGesture2)
+        
+        dropDowntapped(view: subjectDDView)
+        dropDowntapped(view: gradeDDView)
         
         // Do any additional setup after loading the view.
     }
     
     
     
-    @objc func customViewTapped(){
+    
+    
+    
+    func dropDowntapped(view : UIView){
+        if view == subjectDDView{
+            view.isUserInteractionEnabled = true
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(subjectViewTapped))
+            view.addGestureRecognizer(tapGesture)
+        } else if view == gradeDDView {
+            view.isUserInteractionEnabled = true
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(gradeViewTapped))
+            view.addGestureRecognizer(tapGesture)
+        }
+    }
+    
+    @objc func gradeViewTapped(){
+        gradeDrop.show()
+    }
+    @objc func subjectViewTapped(){
         subDrop.show()
     }
     
-    func setDropDown(_ dropDown : DropDown, dataSource : [String]){
-        dropDown.anchorView = subjectDDView
+    func setDropDown(_ dropDown : DropDown, dataSource : [String], in view : UIView){
+        dropDown.anchorView = view
         dropDown.dataSource = dataSource
         dropDown.bottomOffset = CGPoint(x: 0, y:(dropDown.anchorView?.plainView.bounds.height)!)
         subDrop.topOffset = CGPoint(x: 0, y:-(dropDown.anchorView?.plainView.bounds.height)!)

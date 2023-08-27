@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class StudentListController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -15,11 +15,15 @@ class ViewController: UIViewController {
     
     var studentList : [StudentModel] = []
     
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         studentManager.delegate = self
         tableView.dataSource = self
+        tableView.delegate = self
         studentManager.getStudents()
         //tableView.reloadData()
         
@@ -31,7 +35,7 @@ class ViewController: UIViewController {
 
 
 
-extension ViewController: StudentManagerDelegate{
+extension StudentListController: StudentManagerDelegate{
     func getData(_manager: StudentManager, studentData: [StudentModel]) {
         
         DispatchQueue.main.async {
@@ -47,7 +51,7 @@ extension ViewController: StudentManagerDelegate{
 }
 
 
-extension ViewController : UITableViewDataSource{
+extension StudentListController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return studentList.count
     }
@@ -64,3 +68,32 @@ extension ViewController : UITableViewDataSource{
     
     
 }
+
+extension StudentListController : UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        performSegue(withIdentifier: "goToProfile", sender: self)
+        }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToProfile"{
+            let destinationVC = segue.destination as! StudentProfileController
+
+            if let selectedIndex = tableView.indexPathForSelectedRow{
+                
+                let selectedStd = studentList[selectedIndex.row]
+                
+                destinationVC.studentModel = selectedStd
+                
+            }
+            
+            
+        }
+    }
+        
+        
+    }
+    
+
+
