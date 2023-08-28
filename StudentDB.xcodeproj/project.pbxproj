@@ -24,6 +24,7 @@
 		E2DD41242A9B164D002A977F /* StudentProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DD41232A9B164D002A977F /* StudentProfileController.swift */; };
 		E2DD41262A9B5224002A977F /* AddStudentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DD41252A9B5224002A977F /* AddStudentModel.swift */; };
 		E2DD41282A9B55F9002A977F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DD41272A9B55F9002A977F /* Constants.swift */; };
+		E2DD412A2A9B6D6E002A977F /* SubjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2DD41292A9B6D6E002A977F /* SubjectManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		E2DD41232A9B164D002A977F /* StudentProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentProfileController.swift; sourceTree = "<group>"; };
 		E2DD41252A9B5224002A977F /* AddStudentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddStudentModel.swift; sourceTree = "<group>"; };
 		E2DD41272A9B55F9002A977F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E2DD41292A9B6D6E002A977F /* SubjectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 				E27771A12A961E530097170F /* StudentModel.swift */,
 				E27771A32A961FDB0097170F /* StudentManager.swift */,
 				E2DD41252A9B5224002A977F /* AddStudentModel.swift */,
+				E2DD41292A9B6D6E002A977F /* SubjectManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				E2B31B742A95DF620003473B /* AppDelegate.swift in Sources */,
 				E2B31B762A95DF620003473B /* SceneDelegate.swift in Sources */,
 				E27771A22A961E530097170F /* StudentModel.swift in Sources */,
+				E2DD412A2A9B6D6E002A977F /* SubjectManager.swift in Sources */,
 				E2B31B7E2A95DF620003473B /* StudentDB.xcdatamodeld in Sources */,
 				E2DD41242A9B164D002A977F /* StudentProfileController.swift in Sources */,
 				E2DD41282A9B55F9002A977F /* Constants.swift in Sources */,

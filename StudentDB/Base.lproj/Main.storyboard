@@ -330,7 +330,7 @@
                                                             <constraint firstAttribute="width" constant="350" id="viQ-pL-l27"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" textContentType="email"/>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -352,7 +352,7 @@
                                                             <constraint firstAttribute="width" constant="350" id="8VQ-F1-ta8"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="phonePad" textContentType="tel"/>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -437,6 +437,9 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hoa-Mr-2hX">
                                                         <rect key="frame" x="217.66666666666663" y="0.0" width="142" height="34.333333333333336"/>
                                                         <buttonConfiguration key="configuration" style="plain" image="plus.app" catalog="system" title="Add Subject"/>
+                                                        <connections>
+                                                            <segue destination="orM-GQ-Ud4" kind="show" id="21S-ln-cu7"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -540,11 +543,17 @@
                     </view>
                     <navigationItem key="navigationItem" id="6aP-l7-YuD"/>
                     <connections>
+                        <outlet property="addressTF" destination="hni-sJ-6In" id="2Lh-NX-rar"/>
+                        <outlet property="boardTF" destination="Omb-q0-5EE" id="SBB-yi-v8o"/>
+                        <outlet property="contactTF" destination="VdN-R2-eac" id="8VD-RS-C9p"/>
+                        <outlet property="dobTF" destination="99I-cc-jnj" id="iP9-Bm-Wcp"/>
+                        <outlet property="emailTF" destination="Z34-oc-fyZ" id="HZn-l4-YjF"/>
+                        <outlet property="firstNameTF" destination="g1A-dp-npw" id="FCM-ob-PMa"/>
                         <outlet property="hscHeight" destination="VXw-wQ-cYf" id="mH0-2h-6j2"/>
                         <outlet property="hscTable" destination="ygz-Je-B0A" id="jVb-hK-9bq"/>
+                        <outlet property="lastNameTF" destination="f8p-Sq-biV" id="x6m-2m-CCi"/>
                         <outlet property="sscHeight" destination="lqK-nF-2DG" id="VgC-O7-Vbs"/>
                         <outlet property="sscTable" destination="0Zu-WN-Hdz" id="k4u-PY-Ezb"/>
-                        <segue destination="orM-GQ-Ud4" kind="show" identifier="addSub" id="OPd-q3-eyv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UMB-cM-u7d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -630,6 +639,9 @@
                                         <rect key="frame" x="0.0" y="140.66666666666669" width="327" height="50.333333333333343"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="filled" title="ADD"/>
+                                        <connections>
+                                            <action selector="addSubjectPressed:" destination="orM-GQ-Ud4" eventType="touchUpInside" id="8t5-3s-IPx"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -646,6 +658,8 @@
                     <navigationItem key="navigationItem" id="ah5-8q-AtB"/>
                     <connections>
                         <outlet property="gradeDDView" destination="p2r-F5-tsA" id="Ibw-9g-Tmv"/>
+                        <outlet property="gradeLabel" destination="3ih-Gc-hau" id="Olp-5E-FW1"/>
+                        <outlet property="subLabel" destination="oUF-s0-WpJ" id="lgt-bj-2p1"/>
                         <outlet property="subjectDDView" destination="PaZ-rL-nk6" id="GJj-b6-l1H"/>
                     </connections>
                 </viewController>

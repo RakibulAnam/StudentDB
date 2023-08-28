@@ -62,7 +62,7 @@ class StudentProfileController: UIViewController {
     
     func setProfile(_ model : StudentModel?){
         if let model = model{
-            var name = "\(model.firstName) \(model.lastName)"
+            let name = "\(model.firstName) \(model.lastName)"
             stdName.text = name
             email.text = model.email
             contact.text = model.contact

@@ -22,13 +22,34 @@ class AddStudentViewController: UIViewController {
     var sscSub : [Subject] = []
     var hscSub : [Subject] = []
     
+    let addSubject = AddSubjectController()
+    
     let studentManager = StudentManager()
+    
+    @IBOutlet weak var firstNameTF: UITextField!
+    @IBOutlet weak var lastNameTF: UITextField!
+    @IBOutlet weak var emailTF: UITextField!
+    @IBOutlet weak var contactTF: UITextField!
+    @IBOutlet weak var dobTF: UITextField!
+    @IBOutlet weak var boardTF: UITextField!
+    @IBOutlet weak var addressTF: UITextField!
+    
+    
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        addSubject.delegate = self
         addTableView()
+        print(sscSub)
+        sscTable.reloadData()
+        hscTable.reloadData()
         // Do any additional setup after loading the view.
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        print(sscSub)
     }
     
 
@@ -49,19 +70,33 @@ class AddStudentViewController: UIViewController {
     
     
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func getStudentDetails(){
+        
+        let fName = firstNameTF.text
+        let lName = lastNameTF.text
+        let email = emailTF.text
+        let contact = contactTF.text
+        let board = boardTF.text
+        let dob = dobTF.text
+        let address = addressTF.text
+        let sscSet = sscSub
+        let hscSet = hscSub
+        
+        let std = AddStudentModel(firstName: fName!, lastName: lName!, email: email!, password: "123", dob: dob!, board: board!, contact: contact!, address: address!, ssc: sscSet, hsc: hscSet)
+        
+        if sscSet.count == 0 || hscSet.count == 0{
+            print("No Subjects ")
+            return
+        }
+        
+        studentManager.postStudent(add: std)
+        
     }
-    */
     
     
     @IBAction func submitPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: "addSub", sender: self)
+        getStudentDetails()
+        navigationController?.popToRootViewController(animated: true)
     }
     
     
@@ -71,19 +106,30 @@ class AddStudentViewController: UIViewController {
 //MARK: - Table DataSource
 extension AddStudentViewController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        if tableView == sscTable{
-//            return sscSub.count
-//        } else if tableView == hscTable{
-//            return hscSub.count
-//        }
-//        else {return 0}
-        return 15
+        if tableView == sscTable{
+            return sscSub.count
+        } else if tableView == hscTable{
+            return hscSub.count
+        }
+        else {return 0}
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "subGrade", for: indexPath) as! TableViewCell
-        cell.subName.text = "Subject"
-        return cell
+        if tableView == sscTable{
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: "subGrade", for: indexPath) as! TableViewCell
+            cell.subName.text = sscSub[indexPath.row].subject
+            cell.grade.text = sscSub[indexPath.row].gpa
+            return cell
+            
+        } else if tableView == hscTable{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "subGrade", for: indexPath) as! TableViewCell
+            cell.subName.text = hscSub[indexPath.row].subject
+            cell.grade.text = hscSub[indexPath.row].gpa
+            return cell
+           
+        }
+        return UITableViewCell()
     }
     
     
@@ -91,3 +137,23 @@ extension AddStudentViewController : UITableViewDataSource{
     
     
 }
+
+
+
+extension AddStudentViewController : AddSubjectDelegate{
+    func getSubject(_ controller: AddSubjectController, subjectData: Subject, isSSC: Bool) {
+        if isSSC {
+            sscSub.append(subjectData)
+            print("SSC")
+        } else {
+            hscSub.append(subjectData)
+            print("HSC")
+        }
+        sscTable.reloadData()
+        hscTable.reloadData()
+    }
+    
+    
+}
+
+
