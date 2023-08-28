@@ -25,8 +25,13 @@ class StudentListController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         studentManager.getStudents()
-        //tableView.reloadData()
+        tableView.reloadData()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        studentManager.getStudents()
+        tableView.reloadData()
     }
     
     

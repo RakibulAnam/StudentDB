@@ -9,16 +9,13 @@ import UIKit
 import DropDown
 
 
-protocol AddSubjectDelegate{
-    func getSubject(_ controller: AddSubjectController, subjectData : Subject, isSSC : Bool)
-}
+
 
 
 class AddSubjectController: UIViewController {
     
     
     var subjectManager = SubjectManager()
-    var delegate : AddSubjectDelegate?
     let subDrop = DropDown()
     let gradeDrop = DropDown()
     
@@ -27,7 +24,7 @@ class AddSubjectController: UIViewController {
     @IBOutlet weak var subLabel: UILabel!
     @IBOutlet weak var gradeLabel: UILabel!
     
-    var fromButton : String?
+    var isSSC : Bool?
     
     var sscSubList : [String] = ["Math", "Science", "Geography"]
     var hscSubList : [String] = ["Math", "Science", "Geography"]
@@ -44,7 +41,7 @@ class AddSubjectController: UIViewController {
         subjectManager.getSSCSubject()
         subjectManager.getHSCSubject()
         subjectManager.getGrades()
-        fromButton = "HSC"
+        
         dropDowntapped(view: subjectDDView)
         dropDowntapped(view: gradeDDView)
     
@@ -53,13 +50,34 @@ class AddSubjectController: UIViewController {
     
     @IBAction func addSubjectPressed(_ sender: Any) {
         
-        if let selectedSub = sendObject(){
-            if fromButton == "SSC"{
-                delegate?.getSubject(self, subjectData: selectedSub, isSSC: true)
-            }else if fromButton == "HSC"{
-                delegate?.getSubject(self, subjectData: selectedSub, isSSC: false)
+        
+        
+        if let selectedData = sendObject(), let isSSC = isSSC{
+            
+            print(selectedData)
+            
+  
+
+            dismiss(animated: true) {
+                print("Dismisal Completion Block executed")
+                if let navigationController = self.navigationController {
+                    print("got Navigation ")
+                    // Loop through the view controllers in the navigation stack
+                    for viewController in navigationController.viewControllers {
+                        if let addStudentViewController = viewController as? AddStudentViewController {
+                            // You've found an instance of AddStudentViewController
+                            // Now you can access its properties or methods
+                            print("Found VC")
+                            addStudentViewController.addSubject(selectedData, isSSC: isSSC)
+                            break // Exit the loop since you found the desired view controller
+                        }
+                    }
+                    navigationController.popViewController(animated: true)
+                }
+                //end Closure
             }
-            navigationController?.popViewController(animated: true)
+            
+            
         }
         
         
@@ -82,7 +100,7 @@ extension AddSubjectController : SubjectManagerDelegate{
         
         DispatchQueue.main.async {
             
-            if(self.fromButton == "SSC"){
+            if(self.isSSC == true ){
                 self.setDropDown(self.subDrop, dataSource: self.sscSubList, in: self.subjectDDView)
             }else {
                 self.setDropDown(self.subDrop, dataSource: self.hscSubList, in: self.subjectDDView)

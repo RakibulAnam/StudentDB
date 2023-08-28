@@ -236,7 +236,9 @@
                             <constraint firstItem="fgb-V4-FCv" firstAttribute="trailing" secondItem="CXM-CO-evy" secondAttribute="trailing" id="n8Q-GK-Ekv"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="abS-Qv-nvN"/>
+                    <navigationItem key="navigationItem" id="abS-Qv-nvN">
+                        <barButtonItem key="rightBarButtonItem" title="Edit Profile" id="lvD-7a-Lru"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="address" destination="Qe7-fs-Bk3" id="0IY-mw-NnC"/>
                         <outlet property="board" destination="Epx-yD-2SR" id="Uln-Pa-lkU"/>
@@ -368,13 +370,13 @@
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="99I-cc-jnj">
+                                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="YYYY-MM-DD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="99I-cc-jnj">
                                                         <rect key="frame" x="0.0" y="28.333333333333314" width="350" height="26.666666666666671"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="350" id="Go9-5d-Lbt"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" textContentType="date-time"/>
                                                     </textField>
                                                 </subviews>
                                                 <constraints>
@@ -438,7 +440,8 @@
                                                         <rect key="frame" x="217.66666666666663" y="0.0" width="142" height="34.333333333333336"/>
                                                         <buttonConfiguration key="configuration" style="plain" image="plus.app" catalog="system" title="Add Subject"/>
                                                         <connections>
-                                                            <segue destination="orM-GQ-Ud4" kind="show" id="21S-ln-cu7"/>
+                                                            <action selector="addSSCPressed:" destination="cgT-af-Zyj" eventType="touchUpInside" id="nvv-dW-L9N"/>
+                                                            <segue destination="orM-GQ-Ud4" kind="show" identifier="goToSSCSub" id="WmM-AG-aap"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -462,6 +465,10 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tpk-Ph-tlR">
                                                         <rect key="frame" x="219.33333333333337" y="0.0" width="142" height="34.333333333333336"/>
                                                         <buttonConfiguration key="configuration" style="plain" image="plus.app" catalog="system" title="Add Subject"/>
+                                                        <connections>
+                                                            <action selector="addHSCPressed:" destination="cgT-af-Zyj" eventType="touchUpInside" id="Nxk-fY-wpU"/>
+                                                            <segue destination="orM-GQ-Ud4" kind="show" identifier="goToHSCSub" id="4Gp-BT-4UP"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -686,6 +693,9 @@
             <point key="canvasLocation" x="-92.36641221374046" y="4.9295774647887329"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="4Gp-BT-4UP"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <image name="person.fill.badge.plus" catalog="system" width="128" height="125"/>
         <image name="plus.app" catalog="system" width="128" height="114"/>

@@ -22,8 +22,6 @@ class AddStudentViewController: UIViewController {
     var sscSub : [Subject] = []
     var hscSub : [Subject] = []
     
-    let addSubject = AddSubjectController()
-    
     let studentManager = StudentManager()
     
     @IBOutlet weak var firstNameTF: UITextField!
@@ -34,6 +32,8 @@ class AddStudentViewController: UIViewController {
     @IBOutlet weak var boardTF: UITextField!
     @IBOutlet weak var addressTF: UITextField!
     
+    var fromEdit : Bool?
+    
     
     
     
@@ -41,7 +41,6 @@ class AddStudentViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        addSubject.delegate = self
         addTableView()
         print(sscSub)
         sscTable.reloadData()
@@ -58,44 +57,39 @@ class AddStudentViewController: UIViewController {
         hscHeight.constant = hscTable.contentSize.height
     }
     
-    private func addTableView(){
-        //sscTable.delegate = self
-        sscTable.dataSource = self
-        //hscTable.delegate = self
-        hscTable.dataSource = self
+    
+    
+    @IBAction func addSSCPressed(_ sender: UIButton) {
         
-        sscTable.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "subGrade")
-        hscTable.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "subGrade")
+        
     }
     
     
     
-    func getStudentDetails(){
-        
-        let fName = firstNameTF.text
-        let lName = lastNameTF.text
-        let email = emailTF.text
-        let contact = contactTF.text
-        let board = boardTF.text
-        let dob = dobTF.text
-        let address = addressTF.text
-        let sscSet = sscSub
-        let hscSet = hscSub
-        
-        let std = AddStudentModel(firstName: fName!, lastName: lName!, email: email!, password: "123", dob: dob!, board: board!, contact: contact!, address: address!, ssc: sscSet, hsc: hscSet)
-        
-        if sscSet.count == 0 || hscSet.count == 0{
-            print("No Subjects ")
-            return
+    
+    @IBAction func addHSCPressed(_ sender: UIButton) {
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToSSCSub" {
+            
+            if let destinationVC = segue.destination as? AddSubjectController{
+                destinationVC.isSSC = true
+            }
+            
+        }else if segue.identifier == "goToHSCSub"{
+            
+            if let destinationVC = segue.destination as? AddSubjectController{
+                destinationVC.isSSC = false
+            }
+            
         }
-        
-        studentManager.postStudent(add: std)
-        
     }
+    
     
     
     @IBAction func submitPressed(_ sender: UIButton) {
-        getStudentDetails()
+        createStudent()
         navigationController?.popToRootViewController(animated: true)
     }
     
@@ -140,19 +134,64 @@ extension AddStudentViewController : UITableViewDataSource{
 
 
 
-extension AddStudentViewController : AddSubjectDelegate{
-    func getSubject(_ controller: AddSubjectController, subjectData: Subject, isSSC: Bool) {
-        if isSSC {
-            sscSub.append(subjectData)
-            print("SSC")
-        } else {
-            hscSub.append(subjectData)
-            print("HSC")
-        }
-        sscTable.reloadData()
-        hscTable.reloadData()
+
+
+// Functions
+extension AddStudentViewController{
+    
+    private func addTableView(){
+        //sscTable.delegate = self
+        sscTable.dataSource = self
+        //hscTable.delegate = self
+        hscTable.dataSource = self
+        
+        sscTable.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "subGrade")
+        hscTable.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: "subGrade")
     }
     
+    
+    
+    func createStudent(){
+        
+        let fName = firstNameTF.text
+        let lName = lastNameTF.text
+        let email = emailTF.text
+        let contact = contactTF.text
+        let board = boardTF.text
+        let dob = dobTF.text
+        let address = addressTF.text
+        let sscSet = sscSub
+        let hscSet = hscSub
+        
+        let std = AddStudentModel(firstName: fName!, lastName: lName!, email: email!, password: "123", dob: dob!, board: board!, contact: contact!, address: address!, ssc: sscSet, hsc: hscSet)
+        
+        if sscSet.count == 0 || hscSet.count == 0{
+            print("No Subjects ")
+            return
+        }
+        
+        studentManager.postStudent(add: std)
+        
+    }
+    
+    
+    func addSubject(_ subject : Subject, isSSC : Bool){
+        
+        if isSSC == true {
+            sscSub.append(subject)
+        } else {
+            hscSub.append(subject)
+        }
+        
+        
+      
+        print("Function Called")
+        sscTable.reloadData()
+        hscTable.reloadData()
+        print(sscSub)
+        print(hscSub)
+        
+    }
     
 }
 
