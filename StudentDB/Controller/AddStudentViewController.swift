@@ -33,9 +33,15 @@ class AddStudentViewController: UIViewController {
     @IBOutlet weak var addressTF: UITextField!
     
     var fromEdit : Bool?
-    
-    
-    
+    var id : Int?
+
+    var firstName : String?
+    var lastName : String?
+    var email : String?
+    var dob : String?
+    var board : String?
+    var contact : String?
+    var address : String?
     
     
     
@@ -43,6 +49,12 @@ class AddStudentViewController: UIViewController {
         super.viewDidLoad()
         addTableView()
         print(sscSub)
+        
+        
+        if fromEdit == true{
+            populateTF(firstName: firstName!, lastName: lastName!, email: email!, dob: dob!, board: board!, contact: contact!, address: address!)
+        }
+        
         sscTable.reloadData()
         hscTable.reloadData()
         // Do any additional setup after loading the view.
@@ -89,7 +101,13 @@ class AddStudentViewController: UIViewController {
     
     
     @IBAction func submitPressed(_ sender: UIButton) {
-        createStudent()
+        
+        if fromEdit == true{
+            updateStudent()
+        } else {
+            createStudent()
+        }
+        
         navigationController?.popToRootViewController(animated: true)
     }
     
@@ -175,6 +193,32 @@ extension AddStudentViewController{
     }
     
     
+    func updateStudent(){
+        
+        let fName = firstNameTF.text
+        let lName = lastNameTF.text
+        let email = emailTF.text
+        let contact = contactTF.text
+        let board = boardTF.text
+        let dob = dobTF.text
+        let address = addressTF.text
+        let sscSet = sscSub
+        let hscSet = hscSub
+        
+        let std = AddStudentModel(firstName: fName!, lastName: lName!, email: email!, password: "123", dob: dob!, board: board!, contact: contact!, address: address!, ssc: sscSet, hsc: hscSet)
+        
+        if sscSet.count == 0 || hscSet.count == 0{
+            print("No Subjects ")
+            return
+        }
+        if let id = id{
+            studentManager.updateStudent(add: std, withID: id)
+        }
+        
+        
+    }
+    
+    
     func addSubject(_ subject : Subject, isSSC : Bool){
         
         if isSSC == true {
@@ -191,6 +235,16 @@ extension AddStudentViewController{
         print(sscSub)
         print(hscSub)
         
+    }
+    
+    func populateTF( firstName : String, lastName : String, email : String, dob : String, board : String, contact : String, address : String){
+        firstNameTF.text = firstName
+        lastNameTF.text = lastName
+        emailTF.text = email
+        contactTF.text = contact
+        boardTF.text = board
+        addressTF.text = address
+        dobTF.text = dob
     }
     
 }

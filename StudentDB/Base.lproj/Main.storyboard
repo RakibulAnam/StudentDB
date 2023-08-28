@@ -237,7 +237,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="abS-Qv-nvN">
-                        <barButtonItem key="rightBarButtonItem" title="Edit Profile" id="lvD-7a-Lru"/>
+                        <barButtonItem key="rightBarButtonItem" title="Edit Profile" id="lvD-7a-Lru">
+                            <connections>
+                                <action selector="editButtonPressed:" destination="YOV-9o-tl9" id="XuG-Fm-hto"/>
+                                <segue destination="cgT-af-Zyj" kind="show" identifier="profileToEdit" id="mM8-mJ-EhY"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="address" destination="Qe7-fs-Bk3" id="0IY-mw-NnC"/>
@@ -485,7 +490,7 @@
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="6wn-e8-k4w"/>
                                                 </constraints>
                                                 <state key="normal" title="Button"/>
-                                                <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Add Student"/>
                                                 <connections>
                                                     <action selector="submitPressed:" destination="cgT-af-Zyj" eventType="touchUpInside" id="NBZ-Cv-K0V"/>
                                                 </connections>
@@ -695,6 +700,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="4Gp-BT-4UP"/>
+        <segue reference="mM8-mJ-EhY"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="person.fill.badge.plus" catalog="system" width="128" height="125"/>

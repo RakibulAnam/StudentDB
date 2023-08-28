@@ -90,15 +90,61 @@ struct StudentManager{
                                  print("JSON Error: \(error.localizedDescription)")
                              }
                 }
-                
             }.resume()
-            
         }
-        
-        
-        
         //END
     }
+    
+    
+    
+    func updateStudent(add std : AddStudentModel, withID: Int){
+        
+        guard let url = URL(string: "\(K.API.UPDATE)\(withID)") else {
+            print("Invalid Posting URL")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "PUT"
+        
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let jSONData = std
+        
+        let encoder = JSONEncoder()
+        
+        if let encodedData = try? encoder.encode(jSONData){
+            
+            print(String(data: encodedData, encoding: .utf8)!)
+            request.httpBody = encodedData
+            
+            
+            URLSession.shared.dataTask(with: request) { data, response, error in
+                
+                if let error = error {
+                                print("ErrorBro: \(error.localizedDescription)")
+                                return
+                            }
+                
+                if let data = data {
+                             do {
+                                 // Parse the response data if needed
+                                 let jsonResponse = try JSONSerialization.jsonObject(with: data, options: [])
+                                 print(jsonResponse)
+                             } catch {
+                                 print("JSON Error: \(error.localizedDescription)")
+                             }
+                }
+            }.resume()
+        }
+        //END
+    }
+    
+    
+    
+    
+    
     
     
 }

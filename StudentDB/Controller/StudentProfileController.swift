@@ -43,6 +43,32 @@ class StudentProfileController: UIViewController {
     }
     
     
+    @IBAction func editButtonPressed(_ sender: UIBarButtonItem) {
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "profileToEdit"{
+            if let destinationVC = segue.destination as? AddStudentViewController{
+                if let model = studentModel{
+                    destinationVC.firstName = model.firstName
+                    destinationVC.lastName = model.lastName
+                    destinationVC.email = model.email
+                    destinationVC.contact = model.contact
+                    destinationVC.board = model.board
+                    destinationVC.address = model.address
+                    destinationVC.dob = model.dob
+                    destinationVC.fromEdit = true
+                    destinationVC.id = model.id
+                    destinationVC.sscSub = model.ssc
+                    destinationVC.hscSub = model.hsc
+                }
+            }
+        }
+    }
+    
+    
+    
+    
     
     private func addTableView(){
         //sscTable.delegate = self
@@ -72,7 +98,8 @@ class StudentProfileController: UIViewController {
         }
         
     }
-    
+
+ 
     
     
     
