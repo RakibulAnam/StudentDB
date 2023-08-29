@@ -39,7 +39,7 @@ class StudentListController: UIViewController {
 }
 
 
-
+//MARK: - StudentManager Delegate
 extension StudentListController: StudentManagerDelegate{
     func getData(_manager: StudentManager, studentData: [StudentModel]) {
         
@@ -55,7 +55,7 @@ extension StudentListController: StudentManagerDelegate{
     
 }
 
-
+//MARK: - TableView DataSource Functions
 extension StudentListController : UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return studentList.count
@@ -74,6 +74,8 @@ extension StudentListController : UITableViewDataSource{
     
 }
 
+
+//MARK: - TableView Delegate Functions
 extension StudentListController : UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -95,6 +97,21 @@ extension StudentListController : UITableViewDelegate{
             
             
         }
+    }
+    
+    
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        tableView.beginUpdates()
+        
+        studentManager.deleteStudent(withID: studentList[indexPath.row].id)
+        studentList.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        
+        tableView.endUpdates()
     }
         
         

@@ -72,15 +72,11 @@ class AddStudentViewController: UIViewController {
     
     
     @IBAction func addSSCPressed(_ sender: UIButton) {
-        
-        
     }
-    
-    
-    
     
     @IBAction func addHSCPressed(_ sender: UIButton) {
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToSSCSub" {
@@ -143,10 +139,33 @@ extension AddStudentViewController : UITableViewDataSource{
         }
         return UITableViewCell()
     }
+}
+
+//MARK: - TableView Delegate
+
+extension AddStudentViewController : UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
     
-    
-    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        tableView.beginUpdates()
+        
+        if tableView == sscTable{
+            
+            sscSub.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            
+        } else if tableView == hscTable{
+          
+            hscSub.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+           
+        }
+
+        tableView.endUpdates()
+    }
     
 }
 

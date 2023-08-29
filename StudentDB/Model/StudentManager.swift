@@ -141,6 +141,36 @@ struct StudentManager{
         //END
     }
     
+    func deleteStudent(withID : Int){
+        
+        guard let url = URL(string: "\(K.API.DELETE)\(withID)") else {
+            print("Invalid URL")
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "DELETE"
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            
+            if let error = error{
+                
+                print("Got Error \(error.localizedDescription)")
+                return
+            }
+                if let data = data {
+                    do {
+                        let jsonResponseArray = try JSONSerialization.jsonObject(with: data, options: [])
+                        print(jsonResponseArray)
+                    } catch {
+                        print("JSON ERROR : \(error.localizedDescription)")
+                    }
+                }
+        }.resume()
+        
+    }
+    
     
     
     
