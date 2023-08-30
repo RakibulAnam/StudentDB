@@ -32,6 +32,8 @@ class AddStudentViewController: UIViewController {
     @IBOutlet weak var boardTF: UITextField!
     @IBOutlet weak var addressTF: UITextField!
     
+    @IBOutlet weak var submitButton: UIButton!
+    
     var fromEdit : Bool?
     var id : Int?
 
@@ -48,15 +50,18 @@ class AddStudentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addTableView()
-        print(sscSub)
-        
-        
+        emailTF.delegate = self
+        contactTF.delegate = self
+        dobTF.delegate = self
+        submitButton.isEnabled = false
         if fromEdit == true{
             populateTF(firstName: firstName!, lastName: lastName!, email: email!, dob: dob!, board: board!, contact: contact!, address: address!)
         }
         
         sscTable.reloadData()
         hscTable.reloadData()
+        
+        
         // Do any additional setup after loading the view.
     }
     override func viewDidAppear(_ animated: Bool) {
@@ -171,6 +176,54 @@ extension AddStudentViewController : UITableViewDelegate {
 
 
 
+//MARK: - UITextField Delegate
+
+extension AddStudentViewController : UITextFieldDelegate{
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.textColor = UIColor.black
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        let input = textField.text ?? ""
+        
+        if textField == emailTF {
+            if isValidEmail(input) {
+            }else{
+                submitButton.isEnabled = false
+                textField.layer.borderColor = UIColor.red.cgColor
+                shakeTextField(textField)
+                textField.textColor = UIColor.red
+                textField.text = "enter a valid email"
+                
+            }
+        } else if textField == contactTF {
+            if isValidContact(input) {
+            }else{
+                submitButton.isEnabled = false
+                textField.layer.borderColor = UIColor.red.cgColor
+                shakeTextField(textField)
+                textField.textColor = UIColor.red
+                textField.text = "contact must be of 11 numbers"
+            } 
+        } else if textField == dobTF{
+            
+            if isValidDob(input) {
+            }else{
+                submitButton.isEnabled = false
+                textField.layer.borderColor = UIColor.red.cgColor
+                shakeTextField(textField)
+                textField.textColor = UIColor.red
+                textField.text = "Date must be in format YYYY-MM-DD"
+            }
+        }
+        
+        validateTextFields()
+        
+    }
+    
+}
+
 
 
 // Functions
@@ -264,6 +317,50 @@ extension AddStudentViewController{
         boardTF.text = board
         addressTF.text = address
         dobTF.text = dob
+    }
+    
+    
+    func isValidEmail(_ email: String) -> Bool{
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+
+        let emailPred = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailPred.evaluate(with: email)
+    }
+    
+    func isValidContact(_ contact: String) -> Bool{
+        let contactRegex = "^[0-9]{11}$"
+
+        let contactPred = NSPredicate(format:"SELF MATCHES %@", contactRegex)
+        return contactPred.evaluate(with: contact)
+    }
+    
+    func shakeTextField(_ textField: UITextField) {
+        let shakeAnimation = CABasicAnimation(keyPath: "position")
+        shakeAnimation.duration = 0.07
+        shakeAnimation.repeatCount = 3
+        shakeAnimation.autoreverses = true
+        shakeAnimation.fromValue = NSValue(cgPoint: CGPoint(x: textField.center.x - 10, y: textField.center.y))
+        shakeAnimation.toValue = NSValue(cgPoint: CGPoint(x: textField.center.x + 10, y: textField.center.y))
+        textField.layer.add(shakeAnimation, forKey: "position")
+    }
+    
+    func isValidDob(_ dob: String) -> Bool{
+        let dobRegex = #"^\d{4}-\d{2}-\d{2}$"#
+
+        let dobPred = NSPredicate(format:"SELF MATCHES %@", dobRegex)
+        return dobPred.evaluate(with: dob)
+    }
+    
+    func validateTextFields() {
+        let isTextField1Valid = isValidEmail(emailTF.text ?? "")
+        let isTextField2Valid = isValidContact(contactTF.text ?? "")
+        let isTextField3Valid = isValidDob(dobTF.text ?? "")
+
+        if isTextField1Valid && isTextField2Valid && isTextField3Valid {
+            submitButton.isEnabled = true
+        } else {
+            submitButton.isEnabled = false
+        }
     }
     
 }
